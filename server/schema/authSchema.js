@@ -11,6 +11,9 @@ const authSchema = new Schema({
         unique: true,
         required: true
     },
+    url: {
+        type: String,
+    },
     password: {
         type: String,
     },
