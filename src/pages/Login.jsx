@@ -12,7 +12,6 @@ import "react-toastify/dist/ReactToastify.css";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
 
   const [login, setLogin] = useState(false);
   const navigate = useNavigate();
@@ -32,9 +31,6 @@ export default function Login() {
     } else if (password === "") {
       toast.error("Password cannot be empty.", toastOptions);
       return false;
-    } else if (confirmPassword === "") {
-      toast.error("Confirm Password cannot be empty.", toastOptions);
-      return false;
     }
     return true;
   };
@@ -48,8 +44,7 @@ export default function Login() {
       url: "http://localhost:3300/api/v1/auth/login",
       data : {
         email,
-        password,
-        confirmPassword
+        password
      },
     }
   
@@ -64,7 +59,6 @@ export default function Login() {
       setLogin(true)
       setEmail('');
       setPassword('');
-      setConfirmPassword('');
      navigate('/create-todo')
       
     } catch (error) {
@@ -118,14 +112,6 @@ export default function Login() {
             name="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            // onChange={(e) => handleChange(e)}
-          />
-          <input
-            type="password"
-            placeholder="Confirm Password"
-            name="confirmPassword"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
             // onChange={(e) => handleChange(e)}
           />
           <button type="submit" onClick={(e) => handleSubmit(e)}>Log In</button>
